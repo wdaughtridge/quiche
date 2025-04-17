@@ -312,6 +312,10 @@ impl Stream {
                 // stream is always an error.
                 if !self.is_local {
                     match (ty, self.remote_initialized) {
+                        (frame::WEBTRANSPORT_FRAME_TYPE_ID, false) => {
+                            self.remote_initialized = true;
+                        },
+
                         (frame::HEADERS_FRAME_TYPE_ID, false) => {
                             self.remote_initialized = true;
                         },
